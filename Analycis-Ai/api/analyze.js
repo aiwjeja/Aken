@@ -14,26 +14,32 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { image } = req.body;
+    const { image, question } = req.body;
 
-    if (!image) {
-      return res.status(400).json({ error: "No image provided" });
+    if (!image && !question) {
+      return res.status(400).json({ error: "No input provided" });
     }
 
-    // 🔑 CONTOH API KEY (GANTI DENGAN ASLI)
+    // 🔑 API KEY
     const GEMINI_API_KEY = "AIzaSyAlUrKmubXpMe7Ior660fRVBiEp5kQ9aYI";
 
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/image-bison-001:generateContent?key=${GEMINI_API_KEY}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [
-            {
-              parts: [
-                {
-                  text: `
+    let response, data, result;
+
+    if (image) {
+      // ==============================
+      // Versi Analisa Gambar (versi lama)
+      // ==============================
+      response = await fetch(
+        `https://generativelanguage.googleapis.com/v1/models/image-bison-001:generateContent?key=${GEMINI_API_KEY}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [
+              {
+                parts: [
+                  {
+                    text: `
 Anda adalah ahli botani, ahli pertanian, dan dokter hewan profesional.
 
 Jika gambar adalah tumbuhan → gunakan format analisa tumbuhan.
@@ -131,32 +137,60 @@ Jika bukan keduanya → jelaskan dengan jelas.
 
 Jawaban harus profesional, terstruktur, jelas, dan tidak bertele-tele.
 `
-                },
-                {
-                  inlineData: {
-                    mimeType: "image/jpeg",
-                    data: image
+                  },
+                  {
+                    inlineData: {
+                      mimeType: "image/jpeg",
+                      data: image
+                    }
                   }
-                }
-              ]
-            }
-          ]
-        })
+                ]
+              }
+            ]
+          })
+        }
+      );
+
+      data = await response.json();
+
+      if (data.error) {
+        return res.status(400).json({
+          error: "Gemini API error",
+          detail: data.error.message
+        });
       }
-    );
 
-    const data = await response.json();
+      result = data.candidates?.[0]?.content?.parts?.[0]?.text || "Analisis tidak tersedia.";
 
-    if (data.error) {
-      return res.status(400).json({
-        error: "Gemini API error",
-        detail: data.error.message
-      });
+    } else if (question) {
+      // ==============================
+      // Versi Text-only
+      // ==============================
+      response = await fetch(
+        `https://generativelanguage.googleapis.com/v1/models/text-bison-001:generateContent?key=${GEMINI_API_KEY}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            prompt: question,
+            temperature: 0.2,
+            candidate_count: 1,
+            max_output_tokens: 500
+          })
+        }
+      );
+
+      data = await response.json();
+
+      if (data.error) {
+        return res.status(400).json({
+          error: "Gemini API error",
+          detail: data.error.message
+        });
+      }
+
+      result = data.candidates?.[0]?.content?.[0]?.text || "Jawaban tidak tersedia.";
     }
-
-    const result =
-      data.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "Analisis tidak tersedia.";
 
     return res.status(200).json({ result });
 
