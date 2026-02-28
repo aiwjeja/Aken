@@ -1,5 +1,4 @@
 export default async function handler(req, res) {
-
   // ✅ CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
@@ -20,28 +19,14 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "No input provided" });
     }
 
-    // 🔑 API KEY tetap sesuai permintaan
+    // 🔑 GANTI DI SINI DENGAN API KEY BARU KAMU
     const GEMINI_API_KEY = "AIzaSyBgxtiatU8WcPWpab_JA2Aeh31VPi0K3t0";
-
-    // ==============================
-    // Pendeteksi Token / API key
-    // ==============================
-    const tokenCheck = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/text-bison-001?key=${GEMINI_API_KEY}`
-    );
-
-    if (!tokenCheck.ok) {
-      return res.status(401).json({
-        error: "Invalid API Key",
-        detail: `Status code: ${tokenCheck.status}`
-      });
-    }
 
     let response, data, result;
 
     if (image) {
       // ==============================
-      // Versi Analisa Gambar (image-bison-001)
+      // Analisa Gambar (image-bison-001)
       // ==============================
       response = await fetch(
         `https://generativelanguage.googleapis.com/v1/models/image-bison-001:generateContent?key=${GEMINI_API_KEY}`,
@@ -175,10 +160,9 @@ Jawaban harus profesional, terstruktur, jelas, dan tidak bertele-tele.
       }
 
       result = data.candidates?.[0]?.content?.parts?.[0]?.text || "Analisis tidak tersedia.";
-
     } else if (question) {
       // ==============================
-      // Versi Text-only (text-bison-001, payload terbaru v1)
+      // Text-only (text-bison-001)
       // ==============================
       response = await fetch(
         `https://generativelanguage.googleapis.com/v1/models/text-bison-001:generateText?key=${GEMINI_API_KEY}`,
@@ -186,10 +170,10 @@ Jawaban harus profesional, terstruktur, jelas, dan tidak bertele-tele.
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            content: [
-              { text: question }
-            ],
-            max_output_tokens: 500
+            instances: [{ content: question }],
+            temperature: 0.2,
+            candidateCount: 1,
+            maxOutputTokens: 500
           })
         }
       );
@@ -203,11 +187,10 @@ Jawaban harus profesional, terstruktur, jelas, dan tidak bertele-tele.
         });
       }
 
-      result = data.candidates?.[0]?.content || "Jawaban tidak tersedia.";
+      result = data.candidates?.[0]?.content?.[0]?.text || "Jawaban tidak tersedia.";
     }
 
     return res.status(200).json({ result });
-
   } catch (error) {
     return res.status(500).json({
       error: "Server error",
