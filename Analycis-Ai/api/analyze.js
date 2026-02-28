@@ -21,7 +21,7 @@ export default async function handler(req, res) {
     }
 
     // 🔑 API KEY
-    const GEMINI_API_KEY = "AIzaSyAlUrKmubXpMe7Ior660fRVBiEp5kQ9aYI";
+    const GEMINI_API_KEY = "AIzaSyAlUrKmubXpMe7Ior660fRVBiEp5kQ9aYI"; // Ganti dengan key asli
 
     let response, data, result;
 
@@ -167,19 +167,15 @@ Jawaban harus profesional, terstruktur, jelas, dan tidak bertele-tele.
       // Versi Text-only (text-bison-001, payload terbaru)
       // ==============================
       response = await fetch(
-        `https://generativelanguage.googleapis.com/v1/models/text-bison-001:generateContent?key=${GEMINI_API_KEY}`,
+        `https://generativelanguage.googleapis.com/v1/models/text-bison-001:generateContent?key=${AIzaSyAlUrKmubXpMe7Ior660fRVBiEp5kQ9aYI}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            requests: [
-              {
-                input: [{ text: question }],
-                temperature: 0.2,
-                candidateCount: 1,
-                maxOutputTokens: 500
-              }
-            ]
+            input: [{ text: question }],
+            temperature: 0.2,
+            candidateCount: 1,
+            maxOutputTokens: 500
           })
         }
       );
@@ -193,7 +189,7 @@ Jawaban harus profesional, terstruktur, jelas, dan tidak bertele-tele.
         });
       }
 
-      result = data.responses?.[0]?.candidates?.[0]?.content?.[0]?.text || "Jawaban tidak tersedia.";
+      result = data.candidates?.[0]?.content?.[0]?.text || "Jawaban tidak tersedia.";
     }
 
     return res.status(200).json({ result });
