@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyMusic Stable</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+body{background:#0f0f0f;color:white;min-height:100vh}
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px;
+}
+
+.logo{font-weight:700;font-size:20px}
+
+input{
+padding:10px 15px;
+border-radius:20px;
+border:none;
+background:#1f1f1f;
+color:white;
+}
+
+.container{
+padding:20px;
+padding-bottom:160px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+gap:15px;
+}
+
+.card{
+background:#181818;
+border-radius:12px;
+overflow:hidden;
+cursor:pointer;
+transition:0.3s;
+}
+
+.card:hover{transform:translateY(-4px)}
+
+.card img{
+width:100%;
+height:160px;
+object-fit:cover;
+}
+
+.card-content{padding:10px}
+
+.card-title{
+font-size:14px;
+font-weight:600;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+
+.card-artist{
+font-size:12px;
+opacity:0.6;
+}
+
+.player{
+position:fixed;
+bottom:0;
+width:100%;
+background:#111;
+padding:15px;
+border-top:1px solid #222;
+display:none;
+flex-direction:column;
+}
+
+.player-info{
+display:flex;
+gap:10px;
+align-items:center;
+margin-bottom:10px;
+}
+
+.player img{
+width:50px;
+height:50px;
+border-radius:8px;
+object-fit:cover;
+}
+
+#youtubePlayer{
+width:100%;
+height:200px;
+border-radius:10px;
+}
+.loading{
+text-align:center;
+padding:30px;
+opacity:0.6;
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">MyMusic</div>
+<input type="text" id="searchInput" placeholder="Cari lagu...">
+</header>
+
+<div class="container">
+<div id="songGrid" class="grid"></div>
+<div id="loading" class="loading">Memuat lagu...</div>
+</div>
+
+<div class="player" id="player">
+<div class="player-info">
+<img id="playerImage">
+<div>
+<div id="playerTitle"></div>
+<div id="playerArtist" style="opacity:0.6;font-size:12px;"></div>
+</div>
+</div>
+<div id="youtubePlayer"></div>
+</div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
+<script>
+const API_URL="https://backend-eight-eta-20.vercel.app";
+
+const grid=document.getElementById("songGrid");
+const loading=document.getElementById("loading");
+const searchInput=document.getElementById("searchInput");
+
+const playerBox=document.getElementById("player");
+const playerTitle=document.getElementById("playerTitle");
+const playerArtist=document.getElementById("playerArtist");
+const playerImage=document.getElementById("playerImage");
+
+let ytPlayer=null;
+let ytReady=false;
+
+function onYouTubeIframeAPIReady(){
+ytPlayer=new YT.Player("youtubePlayer",{
+height:"200",
+width:"100%",
+videoId:"",
+events:{
+'onReady':()=>{ytReady=true;},
+'onError':()=>{alert("Video tidak bisa diputar (dibatasi YouTube).");}
+}
+});
+}
+
+async function fetchSongs(query="indonesia hits"){
+try{
+loading.style.display="block";
+grid.innerHTML="";
+const res=await fetch(`${API_URL}/search?q=${encodeURIComponent(query)}`);
+const data=await res.json();
+loading.style.display="none";
+
+data.results.forEach(song=>{
+const card=document.createElement("div");
+card.className="card";
+card.innerHTML=`
+<img src="${song.thumbnail}">
+<div class="card-content">
+<div class="card-title">${song.title}</div>
+<div class="card-artist">${song.artist}</div>
+</div>
+`;
+
+card.onclick=()=>{
+playerTitle.textContent=song.title;
+playerArtist.textContent=song.artist;
+playerImage.src=song.thumbnail;
+playerBox.style.display="flex";
+
+if(ytReady && ytPlayer){
+ytPlayer.loadVideoById(song.videoId);
+}
+};
+
+grid.appendChild(card);
+});
+
+}catch(e){
+loading.textContent="Gagal memuat lagu.";
+}
+}
+
+searchInput.addEventListener("keyup",e=>{
+if(e.key==="Enter"){
+fetchSongs(searchInput.value);
+}
+});
+
+fetchSongs();
+</script>
+
+</body>
+</html>
