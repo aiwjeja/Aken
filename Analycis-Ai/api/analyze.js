@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     }
 
     // 🔑 GANTI DI SINI DENGAN API KEY BARU KAMU
-    const GEMINI_API_KEY = "AIzaSyBgxtiatU8WcPWpab_JA2Aeh31VPi0K3t0";
+    const GEMINI_API_KEY = "AIzaSyCKNCMCGAI-LSmU08oUDLp2rMoT4nl0Law";
 
     let response, data, result;
 
