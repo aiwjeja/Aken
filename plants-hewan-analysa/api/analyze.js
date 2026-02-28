@@ -21,7 +21,7 @@ export default async function handler(req, res) {
     }
 
     // 🔑 CONTOH API KEY (GANTI DENGAN ASLI)
-    const GEMINI_API_KEY = "jsjsnsjsjsjsjjs";
+    const GEMINI_API_KEY = "AIzaSyAlUrKmubXpMe7Ior660fRVBiEp5kQ9aYI";
 
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
