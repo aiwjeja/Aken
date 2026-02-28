@@ -21,7 +21,7 @@ export default async function handler(req, res) {
     }
 
     // 🔑 API KEY tetap sesuai permintaan
-    const GEMINI_API_KEY = "AIzaSyAlUrKmubXpMe7Ior660fRVBiEp5kQ9aYI";
+    const GEMINI_API_KEY = "AIzaSyBgxtiatU8WcPWpab_JA2Aeh31VPi0K3t0";
 
     // ==============================
     // Pendeteksi Token / API key
