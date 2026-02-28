@@ -20,8 +20,8 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "No input provided" });
     }
 
-    // 🔑 API KEY
-    const GEMINI_API_KEY = "AIzaSyAlUrKmubXpMe7Ior660fRVBiEp5kQ9aYI"; // Ganti dengan key asli
+    // 🔑 API KEY (tetap pakai key kamu)
+    const GEMINI_API_KEY = "AIzaSyAlUrKmubXpMe7Ior660fRVBiEp5kQ9aYI";
 
     let response, data, result;
 
@@ -167,7 +167,7 @@ Jawaban harus profesional, terstruktur, jelas, dan tidak bertele-tele.
       // Versi Text-only (text-bison-001, payload terbaru)
       // ==============================
       response = await fetch(
-        `https://generativelanguage.googleapis.com/v1/models/text-bison-001:generateContent?key=${AIzaSyAlUrKmubXpMe7Ior660fRVBiEp5kQ9aYI}`,
+        `https://generativelanguage.googleapis.com/v1/models/text-bison-001:generateContent?key=${GEMINI_API_KEY}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
