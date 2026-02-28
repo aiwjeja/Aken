@@ -27,7 +27,7 @@ export default async function handler(req, res) {
 
     if (image) {
       // ==============================
-      // Versi Analisa Gambar (versi lama)
+      // Versi Analisa Gambar (image-bison-001)
       // ==============================
       response = await fetch(
         `https://generativelanguage.googleapis.com/v1/models/image-bison-001:generateContent?key=${GEMINI_API_KEY}`,
@@ -164,7 +164,7 @@ Jawaban harus profesional, terstruktur, jelas, dan tidak bertele-tele.
 
     } else if (question) {
       // ==============================
-      // Versi Text-only
+      // Versi Text-only (text-bison-001, payload terbaru)
       // ==============================
       response = await fetch(
         `https://generativelanguage.googleapis.com/v1/models/text-bison-001:generateContent?key=${GEMINI_API_KEY}`,
@@ -172,10 +172,14 @@ Jawaban harus profesional, terstruktur, jelas, dan tidak bertele-tele.
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            prompt: question,
-            temperature: 0.2,
-            candidate_count: 1,
-            max_output_tokens: 500
+            requests: [
+              {
+                input: [{ text: question }],
+                temperature: 0.2,
+                candidateCount: 1,
+                maxOutputTokens: 500
+              }
+            ]
           })
         }
       );
@@ -189,7 +193,7 @@ Jawaban harus profesional, terstruktur, jelas, dan tidak bertele-tele.
         });
       }
 
-      result = data.candidates?.[0]?.content?.[0]?.text || "Jawaban tidak tersedia.";
+      result = data.responses?.[0]?.candidates?.[0]?.content?.[0]?.text || "Jawaban tidak tersedia.";
     }
 
     return res.status(200).json({ result });
