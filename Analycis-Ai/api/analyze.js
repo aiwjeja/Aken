@@ -20,8 +20,22 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "No input provided" });
     }
 
-    // 🔑 API KEY (tetap pakai key kamu)
+    // 🔑 API KEY tetap sesuai permintaan
     const GEMINI_API_KEY = "AIzaSyAlUrKmubXpMe7Ior660fRVBiEp5kQ9aYI";
+
+    // ==============================
+    // Pendeteksi Token / API key
+    // ==============================
+    const tokenCheck = await fetch(
+      `https://generativelanguage.googleapis.com/v1/models/text-bison-001?key=${GEMINI_API_KEY}`
+    );
+
+    if (!tokenCheck.ok) {
+      return res.status(401).json({
+        error: "Invalid API Key",
+        detail: `Status code: ${tokenCheck.status}`
+      });
+    }
 
     let response, data, result;
 
@@ -164,18 +178,18 @@ Jawaban harus profesional, terstruktur, jelas, dan tidak bertele-tele.
 
     } else if (question) {
       // ==============================
-      // Versi Text-only (text-bison-001, payload terbaru)
+      // Versi Text-only (text-bison-001, payload terbaru v1)
       // ==============================
       response = await fetch(
-        `https://generativelanguage.googleapis.com/v1/models/text-bison-001:generateContent?key=${GEMINI_API_KEY}`,
+        `https://generativelanguage.googleapis.com/v1/models/text-bison-001:generateText?key=${GEMINI_API_KEY}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            input: [{ text: question }],
-            temperature: 0.2,
-            candidateCount: 1,
-            maxOutputTokens: 500
+            content: [
+              { text: question }
+            ],
+            max_output_tokens: 500
           })
         }
       );
@@ -189,7 +203,7 @@ Jawaban harus profesional, terstruktur, jelas, dan tidak bertele-tele.
         });
       }
 
-      result = data.candidates?.[0]?.content?.[0]?.text || "Jawaban tidak tersedia.";
+      result = data.candidates?.[0]?.content || "Jawaban tidak tersedia.";
     }
 
     return res.status(200).json({ result });
