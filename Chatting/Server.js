@@ -1,2 +1,180 @@
-const encoded = "Ci8vID09PT09IHNlcnZlci5qcyA9PT09PQpjb25zdCBleHByZXNzID0gcmVxdWlyZSgiZXhwcmVzcyIpOwpjb25zdCBodHRwID0gcmVxdWlyZSgiaHR0cCIpOwpjb25zdCB7IFNlcnZlciB9ID0gcmVxdWlyZSgic29ja2V0LmlvIik7CmNvbnN0IG11bHRlciA9IHJlcXVpcmUoIm11bHRlciIpOwpjb25zdCBjb3JzID0gcmVxdWlyZSgiY29ycyIpOwpjb25zdCBwYXRoID0gcmVxdWlyZSgicGF0aCIpOwpjb25zdCBmcyA9IHJlcXVpcmUoImZzIik7CmNvbnN0IGluaXRTcWxKcyA9IHJlcXVpcmUoInNxbC5qcyIpOwoKY29uc3QgYXBwID0gZXhwcmVzcygpOwpjb25zdCBzZXJ2ZXIgPSBodHRwLmNyZWF0ZVNlcnZlcihhcHApOwpjb25zdCBpbyA9IG5ldyBTZXJ2ZXIoc2VydmVyLCB7IGNvcnM6IHsgb3JpZ2luOiAiKiIgfSB9KTsKCmlmICghZnMuZXhpc3RzU3luYygidXBsb2FkcyIpKSB7CiAgZnMubWtkaXJTeW5jKCJ1cGxvYWRzIik7Cn0KCmFwcC51c2UoY29ycygpKTsKYXBwLnVzZShleHByZXNzLmpzb24oKSk7CmFwcC51c2UoIi91cGxvYWRzIiwgZXhwcmVzcy5zdGF0aWMocGF0aC5qb2luKF9fZGlybmFtZSwgInVwbG9hZHMiKSkpOwoKY29uc3Qgc3RvcmFnZSA9IG11bHRlci5kaXNrU3RvcmFnZSh7CiAgZGVzdGluYXRpb246IGZ1bmN0aW9uIChyZXEsIGZpbGUsIGNiKSB7CiAgICBjYihudWxsLCAidXBsb2Fkcy8iKTsKICB9LAogIGZpbGVuYW1lOiBmdW5jdGlvbiAocmVxLCBmaWxlLCBjYikgewogICAgY2IobnVsbCwgRGF0ZS5ub3coKSArICItIiArIGZpbGUub3JpZ2luYWxuYW1lKTsKICB9Cn0pOwpjb25zdCB1cGxvYWQgPSBtdWx0ZXIoeyBzdG9yYWdlOiBzdG9yYWdlIH0pOwoKYXBwLnBvc3QoIi91cGxvYWQiLCB1cGxvYWQuc2luZ2xlKCJpbWFnZSIpLCBmdW5jdGlvbiAocmVxLCByZXMpIHsKICBpZiAoIXJlcS5maWxlKSB7CiAgICByZXR1cm4gcmVzLnN0YXR1cyg0MDApLmpzb24oeyBlcnJvcjogIlRpZGFrIGFkYSBmaWxlIiB9KTsKICB9CgogIHJlcy5qc29uKHsKICAgIHVybDogcmVxLnByb3RvY29sICsgIjovLyIgKyByZXEuZ2V0KCJob3N0IikgKyAiL3VwbG9hZHMvIiArIHJlcS5maWxlLmZpbGVuYW1lCiAgfSk7Cn0pOwoKbGV0IGRiOwoKKGFzeW5jIGZ1bmN0aW9uICgpIHsKICBjb25zdCBTUUwgPSBhd2FpdCBpbml0U3FsSnMoKTsKICBkYiA9IG5ldyBTUUwuRGF0YWJhc2UoKTsKCiAgZGIucnVuKAogICAgIkNSRUFURSBUQUJMRSBJRiBOT1QgRVhJU1RTIG1lc3NhZ2VzICgiICsKICAgICAgImlkIElOVEVHRVIgUFJJTUFSWSBLRVkgQVVUT0lOQ1JFTUVOVCwiICsKICAgICAgInVzZXJuYW1lIFRFWFQsIiArCiAgICAgICJtZXNzYWdlIFRFWFQsIiArCiAgICAgICJpbWFnZVVybCBURVhULCIgKwogICAgICAidGltZXN0YW1wIERBVEVUSU1FIERFRkFVTFQgQ1VSUkVOVF9USU1FU1RBTVAiICsKICAgICIpOyIKICApOwp9KSgpOwoKZnVuY3Rpb24gc2F2ZU1lc3NhZ2UodXNlcm5hbWUsIG1lc3NhZ2UsIGltYWdlVXJsKSB7CiAgaWYgKCFkYikgcmV0dXJuOwoKICBkYi5ydW4oCiAgICAiSU5TRVJUIElOVE8gbWVzc2FnZXMgKHVzZXJuYW1lLCBtZXNzYWdlLCBpbWFnZVVybCkgVkFMVUVTICg/LCA/LCA/KSIsCiAgICBbdXNlcm5hbWUgfHwgIkFub24iLCBtZXNzYWdlIHx8ICIiLCBpbWFnZVVybCB8fCBudWxsXQogICk7Cn0KCmZ1bmN0aW9uIGdldENoYXRIaXN0b3J5KCkgewogIGlmICghZGIpIHJldHVybiBbXTsKCiAgY29uc3Qgc3RtdCA9IGRiLnByZXBhcmUoIlNFTEVDVCAqIEZST00gbWVzc2FnZXMgT1JERVIgQlkgaWQgQVNDIik7CiAgY29uc3QgcmVzdWx0ID0gW107CgogIHdoaWxlIChzdG10LnN0ZXAoKSkgewogICAgcmVzdWx0LnB1c2goc3RtdC5nZXRBc09iamVjdCgpKTsKICB9CgogIHN0bXQuZnJlZSgpOwogIHJldHVybiByZXN1bHQ7Cn0KCmxldCBzZXJ2ZXJTdGF0dXMgPSB0cnVlOwpsZXQgb25saW5lVXNlcnMgPSBbXTsKCmZ1bmN0aW9uIHJlbmRlckNvbnNvbGUoKSB7CiAgY29uc29sZS5jbGVhcigpOwogIGNvbnNvbGUubG9nKCJDSEFUIFNFUlZFUiBPTkxJTkUiKTsKICBjb25zb2xlLmxvZygiU3RhdHVzOiIsIHNlcnZlclN0YXR1cyA/ICJPTkxJTkUiIDogIk9GRkxJTkUiKTsKICBjb25zb2xlLmxvZygiVXNlcnM6Iiwgb25saW5lVXNlcnMubGVuZ3RoKTsKfQoKYXBwLmdldCgiL3NlcnZlci9zdGF0dXMiLCBmdW5jdGlvbiAocmVxLCByZXMpIHsKICByZXMuanNvbih7CiAgICBzdGF0dXM6IHNlcnZlclN0YXR1cyA/ICJPTkxJTkUiIDogIk9GRkxJTkUiLAogICAgb25saW5lVXNlcnM6IG9ubGluZVVzZXJzCiAgfSk7Cn0pOwoKYXBwLnBvc3QoIi9zZXJ2ZXIvc3RhcnQiLCBmdW5jdGlvbiAocmVxLCByZXMpIHsKICBzZXJ2ZXJTdGF0dXMgPSB0cnVlOwogIHJlbmRlckNvbnNvbGUoKTsKICByZXMuanNvbih7IHN0YXR1czogIk9OTElORSIgfSk7Cn0pOwoKYXBwLnBvc3QoIi9zZXJ2ZXIvc3RvcCIsIGZ1bmN0aW9uIChyZXEsIHJlcykgewogIHNlcnZlclN0YXR1cyA9IGZhbHNlOwogIHJlbmRlckNvbnNvbGUoKTsKICByZXMuanNvbih7IHN0YXR1czogIk9GRkxJTkUiIH0pOwp9KTsKCmlvLm9uKCJjb25uZWN0aW9uIiwgZnVuY3Rpb24gKHNvY2tldCkgewoKICBzb2NrZXQuZW1pdCgiY2hhdEhpc3RvcnkiLCBnZXRDaGF0SGlzdG9yeSgpKTsKCiAgc29ja2V0Lm9uKCJyZWdpc3RlclVzZXIiLCBmdW5jdGlvbiAodXNlcm5hbWUpIHsKICAgIHNvY2tldC51c2VybmFtZSA9IHVzZXJuYW1lIHx8ICJBbm9uIjsKCiAgICBpZiAoIW9ubGluZVVzZXJzLmluY2x1ZGVzKHNvY2tldC51c2VybmFtZSkpIHsKICAgICAgb25saW5lVXNlcnMucHVzaChzb2NrZXQudXNlcm5hbWUpOwogICAgfQoKICAgIHJlbmRlckNvbnNvbGUoKTsKICAgIGlvLmVtaXQoIm9ubGluZVVzZXJzIiwgb25saW5lVXNlcnMpOwogIH0pOwoKICBzb2NrZXQub24oImNoYXRNZXNzYWdlIiwgZnVuY3Rpb24gKGRhdGEpIHsKICAgIGlmICghc2VydmVyU3RhdHVzKSByZXR1cm47CgogICAgc2F2ZU1lc3NhZ2UoZGF0YS51c2VybmFtZSwgZGF0YS5tZXNzYWdlLCBkYXRhLmltYWdlVXJsKTsKICAgIGlvLmVtaXQoImNoYXRNZXNzYWdlIiwgZGF0YSk7CiAgfSk7CgogIHNvY2tldC5vbigiZGlzY29ubmVjdCIsIGZ1bmN0aW9uICgpIHsKICAgIGlmIChzb2NrZXQudXNlcm5hbWUpIHsKICAgICAgb25saW5lVXNlcnMgPSBvbmxpbmVVc2Vycy5maWx0ZXIoZnVuY3Rpb24gKHUpIHsKICAgICAgICByZXR1cm4gdSAhPT0gc29ja2V0LnVzZXJuYW1lOwogICAgICB9KTsKICAgIH0KCiAgICByZW5kZXJDb25zb2xlKCk7CiAgICBpby5lbWl0KCJvbmxpbmVVc2VycyIsIG9ubGluZVVzZXJzKTsKICB9KTsKCn0pOwoKY29uc3QgUE9SVCA9IHByb2Nlc3MuZW52LlBPUlQgfHwgMzAwMDsKCnNlcnZlci5saXN0ZW4oUE9SVCwgZnVuY3Rpb24gKCkgewogIHJlbmRlckNvbnNvbGUoKTsKfSk7Cg==";
-eval(Buffer.from(encoded, 'base64').toString());
+// ===== server.js =====
+const express = require("express");
+const http = require("http");
+const { Server } = require("socket.io");
+const multer = require("multer");
+const cors = require("cors");
+const path = require("path");
+const fs = require("fs");
+const initSqlJs = require("sql.js");
+
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server, { cors: { origin: "*" } });
+
+// ===== Pastikan folder uploads ada =====
+if (!fs.existsSync("uploads")) {
+  fs.mkdirSync("uploads");
+}
+
+// ===== Middleware =====
+app.use(cors());
+app.use(express.json());
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+// ===== Multer Setup =====
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);                     }
+});
+const upload = multer({ storage: storage });
+
+// ===== Upload Endpoint =====
+app.post("/upload", upload.single("image"), function (req, res) {
+  if (!req.file) {
+    return res.status(400).json({ error: "Tidak ada file" });
+  }
+
+  res.json({
+    url: req.protocol + "://" + req.get("host") + "/uploads/" + req.file.filename
+  });
+});
+
+// ===== Database SQL.js =====
+let db;
+
+(async function () {
+  const SQL = await initSqlJs();
+  db = new SQL.Database();
+
+  db.run(
+    "CREATE TABLE IF NOT EXISTS messages (" +                               "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+      "username TEXT," +
+      "message TEXT," +
+      "imageUrl TEXT," +
+      "timestamp DATETIME DEFAULT CURRENT_TIMESTAMP" +
+    ");"                                                                );
+})();
+
+// ===== Save Message =====
+function saveMessage(username, message, imageUrl) {
+  if (!db) return;
+
+  db.run(
+    "INSERT INTO messages (username, message, imageUrl) VALUES (?, ?, ?)",
+    [username || "Anon", message || "", imageUrl || null]
+  );
+}
+
+// ===== Get History =====
+function getChatHistory() {
+  if (!db) return [];
+
+  const stmt = db.prepare("SELECT * FROM messages ORDER BY id ASC");
+  const result = [];
+
+  while (stmt.step()) {
+    result.push(stmt.getAsObject());
+  }
+
+  stmt.free();
+  return result;
+}
+
+// ===== Server Status & Online Users =====
+let serverStatus = true;
+let onlineUsers = [];
+
+// ===== Console Render (Google Style Clean) =====
+function renderConsole() {
+  console.clear();
+
+  console.log("====================================");
+  console.log("        🌐 CHAT SERVER PANEL       ");
+  console.log("====================================");
+  console.log("");
+  console.log("Status Server  :", serverStatus ? "🟢 ONLINE" : "🔴 OFFLINE");
+  console.log("Jumlah Online  :", onlineUsers.length, "user");
+  console.log("");
+
+  if (onlineUsers.length > 0) {
+    console.log("Daftar User Online:");
+    console.log("---------------------");
+    onlineUsers.forEach(function (user, index) {
+      console.log((index + 1) + ". " + user);
+    });
+  } else {
+    console.log("Belum ada user online...");
+  }
+
+  console.log("");
+  console.log("Server jalan di http://localhost:3000");
+  console.log("====================================");
+}
+
+// ===== API Status Control =====
+app.get("/server/status", function (req, res) {
+  res.json({
+    status: serverStatus ? "ONLINE" : "OFFLINE",
+    onlineUsers: onlineUsers
+  });
+});
+
+app.post("/server/start", function (req, res) {
+  serverStatus = true;
+  renderConsole();
+  res.json({ status: "ONLINE" });
+});
+
+app.post("/server/stop", function (req, res) {
+  serverStatus = false;
+  renderConsole();
+  res.json({ status: "OFFLINE" });
+});
+
+// ===== Socket.IO =====
+io.on("connection", function (socket) {
+
+  socket.emit("chatHistory", getChatHistory());
+
+  socket.on("registerUser", function (username) {
+    socket.username = username || "Anon";
+
+    if (!onlineUsers.includes(socket.username)) {
+      onlineUsers.push(socket.username);
+    }
+
+    renderConsole();
+    io.emit("onlineUsers", onlineUsers);
+  });
+
+  socket.on("chatMessage", function (data) {
+    if (!serverStatus) return;
+
+    saveMessage(data.username, data.message, data.imageUrl);
+    io.emit("chatMessage", data);
+  });
+
+  socket.on("disconnect", function () {
+
+    if (socket.username) {
+      onlineUsers = onlineUsers.filter(function (u) {
+        return u !== socket.username;
+      });
+    }
+
+    renderConsole();
+    io.emit("onlineUsers", onlineUsers);
+  });
+
+});
+
+// ===== Run Server =====
+const PORT = process.env.PORT || 3000;
+
+server.listen(PORT, function () {
+  renderConsole();
+});
